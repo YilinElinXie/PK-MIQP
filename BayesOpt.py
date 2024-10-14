@@ -1,7 +1,7 @@
 from scipy.optimize import minimize
 from sklearn.preprocessing import MinMaxScaler
 from models import *
-from MIQP import *
+from PK_MIQP import *
 from utils import *
 from Functions.benchmarks import *
 
@@ -12,7 +12,7 @@ def BayesOpt(function, method, n_iter, n_init_samples=10):
     Args:
         function (class): objective function class, select from Functions repo
         method (str): name of minimizer,
-                    select from "MIQP", "MIQP-add", "L-BFGS-B", "Nelder-Mead", "COBYLA", "SLSQP", "trust-constr"
+                    select from "PK-MIQP", "PK-MIQP-add", "L-BFGS-B", "Nelder-Mead", "COBYLA", "SLSQP", "trust-constr"
         n_iter (int): number of iterations
         n_init_samples (int): number of initial sample points
 
