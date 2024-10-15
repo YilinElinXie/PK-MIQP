@@ -19,7 +19,7 @@ class SVM():
 
     def obj(self, x):
 
-        twenty_all = fetch_20newsgroups(
+        twenty_dataset = fetch_20newsgroups(
             shuffle=True,
         )
 
@@ -35,6 +35,6 @@ class SVM():
         ])
 
 
-        average_cross_validation_score = cross_val_score(text_clf, twenty_all.data, twenty_all.target, cv=5).mean()
+        average_cross_validation_score = cross_val_score(text_clf, twenty_dataset.data, twenty_dataset.target, cv=5).mean()
 
         return -average_cross_validation_score
