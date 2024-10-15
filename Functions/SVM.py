@@ -20,7 +20,6 @@ class SVM():
     def obj(self, x):
 
         twenty_all = fetch_20newsgroups(
-            subset='all',
             shuffle=True,
         )
 
