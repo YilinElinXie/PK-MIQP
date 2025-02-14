@@ -1,3 +1,4 @@
+import gpflow.kernels
 from scipy.optimize import minimize
 from sklearn.preprocessing import MinMaxScaler
 from models import *
@@ -6,7 +7,7 @@ from utils import *
 from Functions.benchmarks import *
 
 
-def BayesOpt(function, method, n_iter, n_init_samples=10):
+def BayesOpt(function, method, n_iter, kernel=gpflow.kernels.Matern32(), n_init_samples=10):
     '''
     BO algorithm to minimize a test function.
     Args:
@@ -14,6 +15,7 @@ def BayesOpt(function, method, n_iter, n_init_samples=10):
         method (str): name of minimizer,
                     select from "PK-MIQP", "PK-MIQP-add", "L-BFGS-B", "Nelder-Mead", "COBYLA", "SLSQP", "trust-constr"
         n_iter (int): number of iterations
+        kernel (class): a kernel class, choose from matern 3/2 or RBF
         n_init_samples (int): number of initial sample points
 
     Returns:
@@ -43,9 +45,9 @@ def BayesOpt(function, method, n_iter, n_init_samples=10):
 
         if method == "PK-MIQP-add":
             # use add-GP model
-            model = Add_GP(X_scaled, Y_scaled)
+            model = Add_GP(X_scaled, Y_scaled, kernel)
         else:
-            model = GP(X_scaled, Y_scaled)
+            model = GP(X_scaled, Y_scaled, kernel)
 
         # GP training
         model.train()
@@ -96,11 +98,11 @@ if __name__ == "__main__":
 
     fun = Bumpy()
     method_1 = "PK-MIQP"
-    x1, y1, log1 = BayesOpt(function=fun, method=method_1, n_iter=5, n_init_samples=10)
+    x1, y1, log1 = BayesOpt(function=fun, method=method_1, n_iter=5, kernel=gpflow.kernels.SquaredExponential(), n_init_samples=10)
     print(f"PK-MIQP results: {x1, y1, log1}")
 
     method_2 = "L-BFGS-B"
-    x2, y2, log2 = BayesOpt(function=fun, method=method_2, n_iter=5, n_init_samples=10)
+    x2, y2, log2 = BayesOpt(function=fun, method=method_2, n_iter=5, kernel=gpflow.kernels.Matern32(), n_init_samples=10)
     print(f"L-BFGS-B results: {x2, y2, log2}")
 
 

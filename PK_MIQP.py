@@ -63,9 +63,17 @@ class PK_MIQP():
         # generate list of x and k(r) for addGenConstrPWL() to model the kernel function k(r)
         r_min = 0
         r_max = np.sqrt(self.D) / self.lengthscales
-        r_1 = 0.486599
-        r_2 = 0.711273
-        r_3 = 2.12369
+
+        if self.GPmodel.kernel.name == "matern32":
+            r_1 = 0.486599
+            r_2 = 0.711273
+            r_3 = 2.12369
+        elif self.GPmodel.kernel.name == "squared_exponential":
+            r_1 = 0.828028
+            r_2 = 1.20993
+            r_3 = 2.52125
+        else:
+            print("Kernel not implemented.")
 
         if r_max <= r_1:
             self.R = np.linspace(0, r_max, 3)
@@ -83,7 +91,12 @@ class PK_MIQP():
                           np.linspace(r_2, r_3, 2, endpoint=False)),
                 np.linspace(r_3, r_max, 3))
 
-        self.k_R = self.GPmodel.kernel.K_r(self.R)
+        if self.GPmodel.kernel.name == "matern32":
+            self.k_R = self.GPmodel.kernel.K_r(self.R)
+        elif self.GPmodel.kernel.name == "squared_exponential":
+            self.k_R = self.GPmodel.kernel.K_r2(np.square(self.R))
+        else:
+            print("Kernel not implemented.")
 
         for i in range(self.N):
             x = self.GPmodel.X[i]

@@ -15,11 +15,11 @@ class GP():
         ls_range (tuple): bounds on kernel lengthscales, default to (0.005, 2)
     '''
 
-    def __init__(self, X, Y):
+    def __init__(self, X, Y, k=gpflow.kernels.Matern32()):
 
         self.X = X
         self.Y = Y
-        self.k = gpflow.kernels.Matern32()
+        self.k = k
         self.m = None
         self.var_range = (0.05, 20.0)
         self.ls_range = (0.005, 2.0)
@@ -90,11 +90,11 @@ class Add_GP():
         ls_range (tuple): bounds on kernel lengthscales, default to (0.005, 2)
     '''
 
-    def __init__(self, X, Y):
+    def __init__(self, X, Y, k=gpflow.kernels.Matern32()):
         self.X = X
         self.Y = Y
         self.decomposition = [[i] for i in range(self.X.shape[1])]
-        self.k = gpflow.kernels.Matern32()
+        self.k = k
         self.m = None
         self.var_range = (0.05, 20.0)
         self.ls_range = (0.005, 2.0)
