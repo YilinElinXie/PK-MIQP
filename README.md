@@ -1,5 +1,5 @@
 # PK-MIQP
-This is the code implementation of **Piecewise-linear Kernel Mixed Integer Quadratic Programming (PK-MIQP)**, an MIP-based minimizer with GP kernel approximation. Read our paper [**Global Optimization of {G}aussian Process Acquisition Functions Using a Piecewise-Linear Kernel Approximation**](https://openreview.net/forum?id=IZv4W76V3T&referrer=%5Bthe%20profile%20of%20Yilin%20Xie%5D(%2Fprofile%3Fid%3D~Yilin_Xie1)) for more details. Please cite as:
+This is the code implementation of **Piecewise-linear Kernel Mixed Integer Quadratic Programming (PK-MIQP)**, an MIP-based minimizer with GP kernel approximation. Read our paper [**Global Optimization of Gaussian Process Acquisition Functions Using a Piecewise-Linear Kernel Approximation**](https://openreview.net/forum?id=IZv4W76V3T&referrer=%5Bthe%20profile%20of%20Yilin%20Xie%5D(%2Fprofile%3Fid%3D~Yilin_Xie1)) for more details. Please cite as:
 
 ```commandline
 @inproceedings{xie2025global,
