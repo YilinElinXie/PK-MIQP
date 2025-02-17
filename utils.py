@@ -34,7 +34,10 @@ def LCB(beta, k, X, Y):
     def lcb(x):
         r_xX = np.array([np.linalg.norm((x - X[i]), ord=2) /
                                  lengthscales for i in range(len(X))])
-        K_xX = k.K_r(r_xX).numpy()
+        if k.name == "matern32":
+            K_xX = k.K_r(r_xX).numpy()
+        elif k.name == "squared_exponential":
+            K_xX = k.K_r2(np.square(r_xX)).numpy()
         mean = K_xX @ K_XX_inv_Y
         variance = K_xx - K_xX @ K_XX_inv @ K_xX
         return mean - beta * np.sqrt(variance)
