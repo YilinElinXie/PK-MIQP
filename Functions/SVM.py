@@ -7,6 +7,9 @@ from sklearn.model_selection import cross_val_score
 import numpy as np
 
 class SVM():
+    '''
+    An implementation of SVM classifier on "20NewsGroup" dataset. Two hyperparameters are set as function variables. Negative average 5-fold cross validation score is set as objective value to be minimized.
+    '''
 
     def __init__(self):
         self.name = "20NewsGroup"
