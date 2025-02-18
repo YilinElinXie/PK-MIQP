@@ -1,5 +1,6 @@
 '''
-Benchmarks function implementation
+Benchmarks function implementation.
+All benchmarks functions are implemented as a class. Each class includes dimensionality (self.D), problem's search domain (self.domain) and global optimal value (self.opt_y). Objective function can be accessed by self.obj(x). 
 '''
 import numpy as np
 
@@ -8,8 +9,8 @@ class Gramacy_Lee():
     def __init__(self):
 
         self.name = "Gramacy_Lee"
-        self.lb = 0.5
-        self.ub = 2.5
+        self.lb = [0.5]
+        self.ub = [2.5]
         self.domain = np.array([[0.5],
                        [2.5]])
         self.D = 1
@@ -24,8 +25,8 @@ class Forrester():
 
     def __init__(self):
         self.name = "Forrester"
-        self.lb = 0
-        self.ub = 1
+        self.lb = [0]
+        self.ub = [1]
         self.domain = np.array([[0],
                        [1]])
         self.D = 1
@@ -36,6 +37,7 @@ class Forrester():
 
 
 class Bumpy():
+    # periodic with multiple local and global minima
 
     def __init__(self):
         self.name = "Bumpy"
@@ -52,6 +54,7 @@ class Bumpy():
 
 
 class Multimodal():
+    # multiple local minima and a unique global minimum
 
     def __init__(self):
         self.name = "Multimodal"
