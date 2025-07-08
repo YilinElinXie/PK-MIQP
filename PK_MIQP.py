@@ -76,20 +76,20 @@ class PK_MIQP():
             print("Kernel not implemented.")
 
         if r_max <= r_1:
-            self.R = np.linspace(0, r_max, 3)
+            self.R = np.linspace(0, r_max, 2 * self.D + 1)
         elif r_1 < r_max <= r_2:
-            self.R = np.append(np.linspace(0, r_1, 2, endpoint=False),
-                                  np.linspace(r_1, r_max, 2))
+            self.R = np.append(np.linspace(0, r_1, 2 * self.D, endpoint=False),
+                                  np.linspace(r_1, r_max, self.D + 1))
         elif r_2 < r_max <= r_3:
-            self.R = np.append(np.append(np.linspace(0, r_1, 2, endpoint=False),
-                                            np.linspace(r_1, r_2, 1, endpoint=False)),
-                                  np.linspace(r_2, r_max, 3))
+            self.R = np.append(np.append(np.linspace(0, r_1, 2 * self.D, endpoint=False),
+                                            np.linspace(r_1, r_2, self.D, endpoint=False)),
+                                  np.linspace(r_2, r_max, 2 * self.D + 1))
         else:
             self.R = np.append(
-                np.append(np.append(np.linspace(0, r_1, 2, endpoint=False),
-                                    np.linspace(r_1, r_2, 1, endpoint=False)),
-                          np.linspace(r_2, r_3, 2, endpoint=False)),
-                np.linspace(r_3, r_max, 3))
+                np.append(np.append(np.linspace(0, r_1, 2 * self.D, endpoint=False),
+                                    np.linspace(r_1, r_2, self.D, endpoint=False)),
+                          np.linspace(r_2, r_3, 2 * self.D, endpoint=False)),
+                np.linspace(r_3, r_max, 2 * self.D + 1))
 
         if self.GPmodel.kernel.name == "matern32":
             self.k_R = self.GPmodel.kernel.K_r(self.R)
